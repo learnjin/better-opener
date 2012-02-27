@@ -1,0 +1,9 @@
+= Better Opener
+
+Preview mails and other notifications (sms for instance) in your browser
+instead of actually sending them out. Inspired and almost similar to the 
+Letter Opener by Ryan Bates Better Opener this gem tries to be more flexible
+as sinatra app.
+
+
+
