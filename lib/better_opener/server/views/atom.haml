@@ -1,0 +1,17 @@
+!!! XML
+%feed{:version=> "0.3", :xmlns=> "http://purl.org/atom/ns#"}
+  %title Notification Outbox
+  %tagline Messages in your Outbox
+  %fullcount= @messages.size
+  %link{:rel=>"alternate", :href => u("/"), :type => "text/html"}
+  %modified= @messages.first.created_at
+  - for message in @messages
+    %entry
+      %title= message.subject
+      %summary= "#{message.subject} ..."
+      %link{:rel => "alternate", :href => u("/#{message.id}")}
+      %modified= message.created_at
+      %issued= message.created_at
+      %category= message.category
+      %id= message.id 
+  

@@ -19,8 +19,13 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_development_dependency "sinatra-contrib"
+
+  s.add_dependency "data_mapper", ">= 1.2"
+  s.add_dependency "dm-sqlite-adapter"
+  s.add_dependency "tilt"
+  s.add_dependency "haml"
+
 end
 
 

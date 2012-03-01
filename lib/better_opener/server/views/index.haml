@@ -1,0 +1,11 @@
+%h1= "Hello Haml!!"
+%p This here is #{@foo} #{@bar} cake
+
+%ul
+  - for m in @messages
+    %li
+      %a{:href => u("/#{m.id}") }= m.subject
+
+
+
+
