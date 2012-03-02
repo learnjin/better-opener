@@ -13,7 +13,7 @@ Add the gem to your development environment and run the <tt>bundle install</tt> 
 
 Set the delivery method in <tt>config/environments/development.rb</tt>
 
-    config.action_mailer.delivery_method = :letter_opener
+    config.action_mailer.delivery_method = :better_opener
 
 Finally install the bundled Sinatra app as a subdirectory of your app by editing your <tt>config.ru</tt>:
 
@@ -26,9 +26,7 @@ Finally install the bundled Sinatra app as a subdirectory of your app by editing
 ==  Chrome Plugin
 
 To take full advantage and get actual notifications, you will want to install
-the accompanying chrome plugin.  Just point it to the notification address you
-set up above.
-
-
+the accompanying chrome-plugin[https://github.com/learnjin/better-opener-chrome].
+Just point it to the notification address you set up above.
 
 
