@@ -1,10 +1,13 @@
-%h1= "Hello Haml!!"
-%p This here is #{@foo} #{@bar} cake
+%h1= "Outgoing Notifications"
+%p
+  %a{:href => u("/purge")}= "Purge All!"
 
 %ul
   - for m in @messages
     %li
-      %a{:href => u("/#{m.id}") }= m.subject
+      = m.category + ": "
+      %em
+        %a{:href => u("/#{m.id}") }= m.subject
 
 
 

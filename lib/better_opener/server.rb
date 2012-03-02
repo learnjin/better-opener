@@ -1,6 +1,6 @@
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'sinatra'
-require 'sinatra/reloader' if development?
+#require 'sinatra/reloader' if development?
 require 'haml'
 require 'data_mapper'
 require 'better_opener' 
@@ -8,9 +8,9 @@ require 'better_opener'
 module BetterOpener
 
   class Server < Sinatra::Base
-    configure :development do
-      register Sinatra::Reloader
-    end
+    #configure :development do
+    # register Sinatra::Reloader
+    #nd
 
     helpers do
       include Rack::Utils
@@ -39,6 +39,11 @@ module BetterOpener
       haml :index
     end
 
+    get "/purge" do
+      BetterOpener::Notification.all.destroy
+      redirect u('/') 
+    end
+
     get "/:id" do
       @message = BetterOpener.get_notification(params[:id])
       @message.body 
@@ -52,3 +57,4 @@ module BetterOpener
 
   end
 end
+

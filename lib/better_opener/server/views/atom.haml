@@ -4,7 +4,7 @@
   %tagline Messages in your Outbox
   %fullcount= @messages.size
   %link{:rel=>"alternate", :href => u("/"), :type => "text/html"}
-  %modified= @messages.first.created_at
+  %modified= @messages.size > 0 ? @messages.first.created_at : Time.now
   - for message in @messages
     %entry
       %title= message.subject

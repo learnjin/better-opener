@@ -11,7 +11,7 @@ module BetterOpener
     include DataMapper::Resource
     property :id, Serial
     property :subject, String
-    property :body, String
+    property :body, Text
     property :created_at, DateTime 
     property :category, String
   end
@@ -30,17 +30,17 @@ module BetterOpener
   end
 
   def get_all_notifications
-    db && Notification.all(:order => [:id.desc])
+    db && BetterOpener::Notification.all(:order => [:id.desc])
   end
 
   def get_notification(id)
-    db && Notification.get(id)
+    db && BetterOpener::Notification.get(id)
   end
 
 
   def add_notification(category, subject, body)
     db
-    n = Notification.new :category => category, :subject => subject, :body => body, :created_at => Time.now
+    n = BetterOpener::Notification.new :category => category, :subject => subject, :body => body, :created_at => Time.now
     n.save
   end
 
@@ -64,10 +64,24 @@ module BetterOpener
   end
 
 
+  def sms_template_path
+    File.expand_path('../better_opener/sms.html.erb', __FILE__)
+  end
+
+  def sms_template
+    Tilt.new(sms_template_path)
+  end
+
+  def render_sms(name, sms, format = nil)
+    sms_template.render(Object.new, :name => name, :sms => sms)
+  end
+
+
 end
 
 require 'better_opener/delivery_method'
 require 'better_opener/server'
 require "better_opener/railtie" if defined? Rails
+require "better_opener/sms_gateway_adapter" if defined? SmsGateway
 
 
