@@ -1,7 +1,7 @@
 BetterOpener
 =============
 
-Preview mails and other notifications, in your browser instead of actually
+Preview mails and other notifications in your browser instead of actually
 sending them out. Inspired by and similar in terms of functionality to the
 [LetterOpener][1] and the [MailView][2] gem BetterOpener tries to be *better*
 by:
@@ -14,21 +14,21 @@ by:
 Setup
 -----
 
-Add the gem to your development environment and run the <tt>bundle install</tt> command to install it.
+Add the gem to your development environment and run the `bundle install` command to install it.
 
     gem "better_opener", :group => :development
 
-Then mount the bundled Sinatra app as a subdirectory of your app by editing <tt>config.ru</tt>:
+Then in Rails3 mount the bundled Sinatra app inline in your `routes.rb`:
 
     if Rails.env == "development"
       mount BetterOpener::Server => "/notifications"
     end
 
-To make messages being sent to "/notifications" set up email and/or sms interception.
+To make messages actually being sent to `/notifications` set up email and/or sms interception.
 
 ### Email
 
-Set the delivery method in <tt>config/environments/development.rb</tt>
+Set the delivery method in `config/environments/development.rb`
 
     config.action_mailer.delivery_method = :better_opener
 
@@ -38,7 +38,7 @@ The design of the email interface is taken from the [mail_view][2] plugin.
 ### SMS
 
 SMS message support is provided for the [sms_gateway][3] gem.
-Edit your <tt>sms_gateway.yml</tt> file:
+Edit your `sms_gateway.yml` file:
 
     development:
       adapter: better_opener
