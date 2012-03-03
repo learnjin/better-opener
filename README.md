@@ -56,6 +56,7 @@ To get actual desktop notifications, you will want to install the accompanying
 [chrome-plugin][4].  Point it to the (full) notification path that you mounted
 this gem on.
 
+![Chrome Notifications](https://github.com/learnjin/better-opener/raw/master/notifications.jpg)
 
 [1]: https://github.com/ryanb/letter_opener
 [2]: https://github.com/37signals/mail_view
