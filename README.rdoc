@@ -36,7 +36,7 @@ Edit your <tt>sms_gateway.yml</tt> file:
       adapter: better_opener
       from: your_app
 
-<img src=sms.jpg>
+<img src=../sms.jpg>
 
 
 ==  Chrome Plugin
