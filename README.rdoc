@@ -6,7 +6,7 @@ letter_opener[https://github.com/ryanb/letter_opener.git] and the
 mail_view[https://github.com/37signals/mail_view] better_opener tries
 to be *better* by:
 
-- providing support for outgoin notifications in general (email, sms so far)
+- providing support for outgoing notifications in general (email, sms so far)
 - allowing remote access to notifications (helpful on staging servers and remote development machines)
 - displaying desktop notifications (with the accompanying chrome plugin)
 
@@ -36,7 +36,7 @@ Edit your <tt>sms_gateway.yml</tt> file:
       adapter: better_opener
       from: your_app
 
-[An SMS message](link://sms.jpg)
+[An SMS message](https://github.com/learnjin/better-opener/sms.jpg)
 
 
 ==  Chrome Plugin
