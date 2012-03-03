@@ -36,7 +36,7 @@ Edit your <tt>sms_gateway.yml</tt> file:
       adapter: better_opener
       from: your_app
 
-[An SMS message](https://github.com/learnjin/better-opener/blob/master/sms.jpg)
+[An SMS message](https://github.com/learnjin/better-opener/raw/master/sms.jpg)
 
 
 ==  Chrome Plugin
