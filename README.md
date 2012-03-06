@@ -25,7 +25,7 @@ Then in Rails3 mount the bundled Sinatra app inline in your `routes.rb`:
       mount BetterOpener::Server => "/notifications"
     end
 
-To make messages actually being sent to `/notifications` set up email and/or sms interception.
+To prevent messages from actually being sent you need to set up email and/or sms interception.
 
 ### Email
 
@@ -58,12 +58,18 @@ static (pre-rendered at time of delivery). To preview your changes without
 going through all the steps to redeliver the message use the
 `add_delayed_notification` method like that:
 
-    def self.deliver_later(method, *params)
-      if Rails.env == "development"
-        BetterOpener.add_delayed_notification("email", Emailer, method, params)
-       else
-         Resque.enqueue(EmailJob, method, *params)
-       end
+    class Emailer < ActionMailer::Base
+    
+     # ....
+
+      def self.deliver_later(method, *params)
+        if Rails.env == "development"
+          BetterOpener.add_delayed_notification("email", Emailer, method, params)
+        else
+          Resque.enqueue(EmailJob, method, *params)
+        end
+      end
+
     end
 
 
