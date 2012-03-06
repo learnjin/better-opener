@@ -10,11 +10,20 @@ module BetterOpener
   class Notification
     include DataMapper::Resource
     property :id, Serial
-    property :subject, String
-    property :body, Text
     property :created_at, DateTime 
-    property :category, String
+    property :subject, String, :length => 255
+    property :summary, String
+
+    property :category, String # influences rendering
+
+    property :klass, String
+    property :method, String
+    property :params, String
+
+    property :rendered, Boolean, :default => false
+    property :body, Text
   end
+
 
   extend self
 
@@ -40,7 +49,23 @@ module BetterOpener
 
   def add_notification(category, subject, body)
     db
-    n = BetterOpener::Notification.new :category => category, :subject => subject, :body => body, :created_at => Time.now
+    n = BetterOpener::Notification.new(:category => category,
+                                       :subject => subject,
+                                       :body => body,
+                                       :created_at => Time.now,
+                                       :rendered => true)
+    n.save
+  end
+
+  def add_delayed_notification(category, klass, method, params)
+    db
+
+    n = BetterOpener::Notification.new(:category => category,
+                                       :subject => method,
+                                       :klass => klass.name,
+                                       :method => method,
+                                       :params => BetterOpener.encode(params),
+                                       :created_at => Time.now)
     n.save
   end
 
@@ -74,6 +99,27 @@ module BetterOpener
 
   def render_sms(name, sms, format = nil)
     sms_template.render(Object.new, :name => name, :sms => sms)
+  end
+
+
+  def encode(params)
+    MultiJson.encode(params)
+  end
+
+  def decode(params)
+    MultiJson.decode(params)
+  end
+
+  def render_notification(n, format = nil)
+    return n.body if n.rendered 
+    klass = Kernel.const_get(n.klass.classify)
+    if n.category == "email"
+      m = klass.send(n.method, *BetterOpener.decode(n.params))
+      BetterOpener.render_email(n.id, m, format)
+    elsif n.category == "sms"
+      m = klass.send(n.method, *BetterOpener.decode(n.params))
+      BetterOpener.render_sms(n.id, m)
+    end
   end
 
 

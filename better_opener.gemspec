@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = BetterOpener::VERSION
   s.authors     = ["Kai Rubarth"]
   s.email       = ["kai@doxter.de"]
-  s.homepage    = "http://github.com/learnjin/better_opener"
+  s.homepage    = "https://github.com/learnjin/better-opener"
   s.summary     = %q{A better way of Previewing mail in your browser instead of sending it.}
   s.description = %q{When mails or messages are sent from your application, Better Opener lets you preview the rendered messages in your browser instead of delivering them.}
 
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "dm-sqlite-adapter"
   s.add_dependency "tilt"
   s.add_dependency "haml"
-
+  s.add_dependency "multi_json"
 end
 
 

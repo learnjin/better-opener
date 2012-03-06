@@ -44,9 +44,13 @@ module BetterOpener
       redirect u('/') 
     end
 
-    get "/:id" do
-      @message = BetterOpener.get_notification(params[:id])
-      @message.body 
+    get %r{/(\d+)(.*)} do
+      #@message = BetterOpener.get_notification(params[:id])
+      #@message.body 
+      id = params[:captures].first
+      format = params[:captures].second
+      @message = BetterOpener.get_notification(id)
+      BetterOpener.render_notification(@message, format)
     end
 
     get "/feed/atom", :provides => [:atom] do
