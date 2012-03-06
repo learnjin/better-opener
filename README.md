@@ -7,6 +7,7 @@ sending them out. Inspired by and similar in terms of functionality to the
 by:
 
 - providing support for outgoing notifications in general (email, sms so far)
+- supporting pre- and on-demand rendering
 - allowing remote access to notifications (helpful on staging servers and remote development machines)
 - displaying desktop notifications (with the accompanying chrome plugin)
 
@@ -47,6 +48,23 @@ Edit your `sms_gateway.yml` file:
 SMS interface:
 
 ![SMS as displayed by the sinatra app](https://github.com/learnjin/better-opener/raw/master/sms.jpg)
+
+
+On-request Rendering
+-------------------
+
+The messages that are being sent with one of the above delivery methods are
+static (pre-rendered at time of delivery). To preview your changes without
+going through all the steps to redeliver the message use the
+`add_delayed_notification` method like that:
+
+    def self.deliver_later(method, *params)
+      if Rails.env == "development"
+        BetterOpener.add_delayed_notification("email", Emailer, method, params)
+       else
+         Resque.enqueue(EmailJob, method, *params)
+       end
+    end
 
 
 Chrome Plugin
